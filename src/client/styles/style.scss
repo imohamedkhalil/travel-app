@@ -3,13 +3,26 @@ body{
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "header header header header header header header header"
+    "form form form form form form form form"
+    "image image card card card card card card"
+    "footer footer footer footer footer footer footer footer";
+}
+
 .headline {
     text-align: center;
+    grid-area: header;
 }
 
 .inputs {
-    width: 100%;
+    // width: 100%;
     text-align: center;
+    grid-area: form;
 }
 
 .city, .date{
@@ -17,94 +30,47 @@ body{
 }
 
 .card {
-    width: 80%;
     display: flex;
     flex-direction: row;
     background-color: rosybrown;
-    margin: 2% auto;
+    margin-top: 2%;
+    margin-left: 2%;
+    grid-area: card;
 }
 
 #image {
-    margin-right: 2%;
+    margin-top: 5%;
+    grid-area: image;
+    width: 100%;
 }
-// #app{
-//     display: grid;
-//     grid-auto-rows: minmax(150px, auto);
-//     /* grid-template-columns:  */
-//     height:100vh;
-//     background: #f23557;
-//     color: #f0d43a;
-//     justify-content: center;
-//     grid-gap: 1em;
-//     font-size: 20px;
-//     font-family: 'Oswald', sans-serif;
-// }
 
+footer {
+    grid-area: footer;
+}
 
-// .entry{
-//     background: rgba(59, 74, 107, .4);
-// }
+@media (min-width: 501px) and (max-width: 720px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas: 
+        "header header header"
+        "form form form "
+        ". image ."
+        "card card card"
+        "footer footer footer";
+    } 
+}
 
-
-// /*  Basic Styling To Override Default For Basic HTML Elements */
-// label{
-//     display:block;
-//     font-size: 27px;
-// }
-
-// input{
-//     display:block;
-//     height: 60px;
-//     width: 320px;
-//     background:#22b2da;
-//     color: #f0d43a;
-//     font-size: 20px;
-//     font-family: 'Oswald', sans-serif;
-//     border: none;
-// }
-
-// button{
-//     width: 400px;
-//     height: 100px;
-//     background: #3b4a6b;
-//     color: #f0d43a;
-//     font-size: 26px;
-//     font-family: 'Oswald', sans-serif;
-//     border: none;
-//     box-shadow: 2px 4px 5px #444;
-// }
-// h1{
-//     font-size: 36px;
-// }
-
-// textarea{
-//     background:#22b2da;
-//     color: #f0d43a;
-//     font-size: 20px;
-//     font-family: 'Oswald', sans-serif;
-// }
-// /* Reset style for HTML element on active to have no border*/
-// input:focus,
-// select:focus,
-// textarea:focus,
-// button:focus {
-//     outline: none;
-// }
-// /* Style for Placeholder Text*/
-// ::placeholder { /* Firefox, Chrome, Opera */ 
-//     color: #f0d43a; 
-//     font-family: 'Oswald', sans-serif;
-
-// } 
-  
-// :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
-//     color: #f0d43a; 
-//     font-family: 'Oswald', sans-serif;
-
-// } 
-  
-// ::-ms-input-placeholder { /* Microsoft Edge */ 
-//     color: #f0d43a; 
-//     font-family: 'Oswald', sans-serif;
-
-// } 
+@media (min-width: 721px) and (max-width: 1420px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas: 
+        "header header header header header header"
+        "form form form form form form"
+        "image image card card card card"
+        "footer footer footer footer footer footer";
+    } 
+}

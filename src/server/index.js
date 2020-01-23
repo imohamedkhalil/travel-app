@@ -34,4 +34,5 @@ app.post('/add', function(req, res){
     projectData.image = req.body.image;
     projectData.city = req.body.city;
     projectData.date = req.body.date;
+    projectData.days = req.body.days;
 });

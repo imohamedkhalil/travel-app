@@ -7,6 +7,8 @@ function app() {
     const submitButton = document.getElementById('submit');
     const travelDate = document.getElementById('dateInput');
     
+    
+    
     const postData = async ( url = '', data = {})=>{
         console.log("Post Data");
         console.log(data)
@@ -24,7 +26,7 @@ function app() {
             console.log("error", error);
         }
     }
-
+    
     async function updateUserInterface(url) {
         let response = await fetch(url);
         const country = document.getElementById('country');
@@ -34,24 +36,36 @@ function app() {
         const summary = document.getElementById('summary');
         const city = document.getElementById('city');
         const date = document.getElementById('date');
-
+        const days = document.getElementById('days');
+        
         try {
             let data = await response.json();
             console.log("Update UI");
             console.log(data);
+            
             country.innerHTML = data.countryName;
             lowTemp.innerHTML = data.lowTemp;
             highTemp.innerHTML = data.highTemp;
             summary.innerHTML = data.summary;
-            image.src = data.image;
             city.innerHTML = data.city;
             date.innerHTML = data.date;
+            days.innerHTML = data.days;
+            image.src = data.image;
+            
         } catch (error) {
             console.log(error);
         }
     }
-
+    
     function fetchData() { 
+        
+        const endDate = document.getElementById('endDateInput').value;
+        const diffDays = ((new Date(endDate).getTime() - new Date(travelDate.value).getTime())/(1000 * 3600 * 24));
+        
+        console.log("Travel Date: "+travelDate);
+        console.log("End Date: "+endDate);
+        console.log("Diff Days: "+diffDays);
+        
         //Calling GeoNames API
         fetch(`http://api.geonames.org/searchJSON?q=${cityInput.value}&maxRows=10&username=imohamedkhalil`)
         .then(response => response.json())
@@ -78,9 +92,10 @@ function app() {
                         lowTemp: darkskyData.daily.data[0].temperatureLow, 
                         highTemp: darkskyData.daily.data[0].temperatureHigh,
                         summary: darkskyData.daily.data[0].summary,
-                        image: pixabayData.hits[0].previewURL,
+                        image: pixabayData.hits[0].webformatURL,
                         city: cityInput.value,
-                        date: travelDate.value
+                        date: travelDate.value,
+                        days: diffDays
                     });
 
                     updateUserInterface('/all');
